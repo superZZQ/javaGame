@@ -1,4 +1,4 @@
-package com.zzq.aircraft_dogfighter;
+package com.cl.plane20180112;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -16,18 +16,16 @@ import javax.swing.JPanel;
 	 */ 
 public class MyBullet {
 		int x,y=0;
-		Graphics g;
 		int bullet_speed = -5;
 		int bullet_radius = 3;
 		
 		//构造方法，传入画笔、面板以及子弹初始坐标
-		public MyBullet(Graphics g,int x,int y){
+		public MyBullet(int x,int y){
 			this.x = x;
 			this.y = y;
-			this.g = g;
 		}
 		//定义画子弹方法，用于开始射击后出现子弹以及线程控制子弹移动
-		public void drawMyBullet(){
+		public void drawMyBullet(Graphics g){
 			y+=bullet_speed;
 			g.setColor(Color.white);
 			g.fillOval(x, y, bullet_radius*2, bullet_radius*2);
@@ -54,5 +52,4 @@ public class MyBullet {
 		public int getBulletRadius() {
 			return bullet_radius;
 		}
-		
 }

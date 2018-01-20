@@ -1,4 +1,4 @@
-package com.zzq.aircraft_dogfighter;
+package com.cl.plane20180112;
 
 import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
@@ -10,13 +10,13 @@ public class KeyListening extends KeyAdapter implements Config {
 	private JPanel jp;
 	private Graphics g;
 	private MyPlane mp;
-	private MyBullet mb;
 	private MyplaneThread mpthread;
+	private EnemyThread epthread;
 	int x, y;
-	int bx, by;
+	int bx, by,ex,ey;
 	int i = 0;
-	int bullet_num = 5;
-	MyBullet[] bullet_array = new MyBullet[bullet_num];
+	MyBullet[] bullet_array = new MyBullet[BULLET_NUM];
+	EnemyAirplane[] enemy_array = new EnemyAirplane[ENEMY_NUM];
 
 	// 构造方法 将PlaneUI中的画笔、画板传入
 	public KeyListening(Graphics g, JPanel jp) {
@@ -48,31 +48,31 @@ public class KeyListening extends KeyAdapter implements Config {
 		case KeyEvent.VK_SPACE:
 			// 仅执行一次
 			if (mpthread == null) {
-				// 在初始位置画出飞机v
-				mp = new MyPlane(g, x, y, jp);
-				
+				// 在初始位置画出飞机
+				mp = new MyPlane(x, y, jp);
 				// 启动线程（也是整个游戏的线程 仅启动一次）
-				mpthread = new MyplaneThread(g, jp, mp,bullet_array);
+				mpthread = new MyplaneThread(g, jp, mp,bullet_array,enemy_array);
 				new Thread(mpthread).start();
+				epthread = new EnemyThread(g,jp,enemy_array);
+				new Thread(epthread).start();
 			}
 			break;
 		// 开火
 		case KeyEvent.VK_ENTER:
-			if(bullet_array[bullet_num-1]!=null){
-				if(bullet_array[bullet_num-1].getY()<0){
-					i=0;
-					bullet_array[bullet_num-1]=null;
-				}else break;
-			}else{
+			if(i==BULLET_NUM){
+				i=0;
+			}		
 				bx = mp.getX()+PLANE_WIDTH/2-BULLET_RADIUS;
-				by = mp.getY()-bullet_num;
-				bullet_array[i] = new MyBullet(g,bx,by);
+				by = mp.getY()-BULLET_NUM;
+				bullet_array[i] = new MyBullet(bx,by);
 				i++;
-			}
 			
-			break;
+			
+			
+			
 		}
 	}
+	
 
 	public void keyReleased(KeyEvent e) {
 		// 将每次释放的键对应的值保存在code变量中
@@ -92,7 +92,6 @@ public class KeyListening extends KeyAdapter implements Config {
 			mp.setVx(0);
 			break;
 		case KeyEvent.VK_ENTER:
-			
 			break;
 		}
 	}

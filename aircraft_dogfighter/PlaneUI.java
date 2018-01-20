@@ -1,4 +1,4 @@
-package com.zzq.aircraft_dogfighter;
+package com.cl.plane20180112;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -46,16 +46,19 @@ public class PlaneUI extends JPanel{
 		
 
 	}
-	public void paint(Graphics g){
-		super.paint(g);
-		//重绘 待完成
-	}
 	
 	
 	public static void main(String[] args){
 		new PlaneUI();
 		
 	}
+	//加注释 传github
+	//排行榜
+	//数据
+	//大敌机 中敌机
+	//加东西换枪
+	//细化
+	
 	
 }
 

@@ -1,6 +1,5 @@
-package com.zzq.aircraft_dogfighter;
+package com.cl.plane20180112;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -22,18 +21,16 @@ public class MyPlane{
 	int x,y;
 	int vx,vy;
 	ImageIcon plane;
-	Graphics g;
 	int plane_width = 100;
 	int plane_height = 60;
 	//构造方法，传入画笔、面板以及飞机初始坐标
-	public MyPlane(Graphics g,int x,int y,JPanel jp){
+	public MyPlane(int x,int y,JPanel jp){
 		this.x = x;
 		this.y = y;
-		this.g = g;
 		this.jp = jp;
 	}
 	//定义画飞机方法，用于开始后出现飞机以及线程控制飞机移动
-	public void drawMyplane(){
+	public void drawMyplane(Graphics g){
 		plane = new ImageIcon(this.getClass().getResource("plane.png"));
 		g.drawImage(plane.getImage(), x, y, plane_width, plane_height, null);
 		//条件判断飞机不飞出边界
